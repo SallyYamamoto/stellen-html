@@ -33,32 +33,62 @@ if (document.getElementById("verbs")) {
       const prefix = item["接頭辞"] || "";
       const prefixMeaning = item["接頭辞基本意味"] || "";
       const core = item["基幹"] || "";
-      const comp = prefix && core ? `${prefix} + ${core}` : "";
+      const composition = prefix && core ? `${prefix} + ${core}` : "";
 
       return `
         <div class="card">
-          <div class="card-header">
+          <div class="header">
             <h2>${item["単語"]}</h2>
-            <small>${comp}</small>
+            <div class="etymology">${composition}</div>
           </div>
-          <div class="card-body">
-            <div class="meaning">${item["意味"]}</div>
-            <div class="english">${item["英訳"]}</div>
 
-            <div class="section"><span class="label">構成：</span>${prefix}（${prefixMeaning}） + ${core}</div>
-            <div class="section"><span class="label">語感：</span>${item["語感"]}</div>
-            <div class="section"><span class="label">構文：</span><i>${item["構文"]}</i></div>
-            <div class="section"><span class="label">活用：</span>${item["活用"]}</div>
+          <div class="meaning-jp">${item["意味"]}</div>
+          <div class="meaning-en">${item["英訳"]}</div>
 
-            <div class="example">
-              ${item["例文1"]}<br>
-              （${item["日本語訳1"]}）<br><br>
-              ${item["例文2"] || ""}<br>
-              ${item["日本語訳2"] ? `（${item["日本語訳2"]}）` : ""}
+          <div class="detail-section">
+            <div class="detail-item">
+              <span class="detail-label">構成 :</span>
+              <span class="detail-value">${prefix}（${prefixMeaning}） + ${core}</span>
             </div>
-
-            <div class="derived">${item["派生語"]}</div>
+            <div class="detail-item">
+              <span class="detail-label">語感 :</span>
+              <span class="detail-value">${item["語感"] || ""}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">構文 :</span>
+              <span class="detail-value"><span class="german-term">${item["構文"] || ""}</span></span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">活用 :</span>
+              <span class="detail-value"><span class="german-term">${item["活用"] || ""}</span></span>
+            </div>
           </div>
+
+          <div class="example-section">
+            ${item["例文1"] ? `
+              <div class="example-box">
+                <div class="vertical-line"></div>
+                <div class="example-content">
+                  <p class="german-sentence">${item["例文1"]}</p>
+                  <p class="japanese-translation">（${item["日本語訳1"]}）</p>
+                </div>
+              </div>` : ""}
+
+            ${item["例文2"] ? `
+              <div class="example-box">
+                <div class="vertical-line"></div>
+                <div class="example-content">
+                  <p class="german-sentence">${item["例文2"]}</p>
+                  <p class="japanese-translation">（${item["日本語訳2"]}）</p>
+                </div>
+              </div>` : ""}
+          </div>
+
+          ${item["派生語"] ? `
+          <div class="noun-form">
+            <span class="abc-icon">🔤</span>
+            <span class="german-term">${item["派生語"]}</span>
+          </div>` : ""}
         </div>
       `;
     }).join("");
