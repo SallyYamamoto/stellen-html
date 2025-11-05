@@ -1,24 +1,59 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>ドイツ語 接頭辞動詞データベース</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <h1>ドイツ語 接頭辞動詞データベース</h1>
-  <p>Prefix–Verb Database in German</p>
+---
+layout: default
+---
+<style>
+    .split-layout { 
+        display: flex; 
+        justify-content: space-between; 
+        gap: 30px; 
+        margin-top: 20px;
+    }
+    .list-section { 
+        flex: 1; 
+        padding: 15px; 
+        border: 1px solid #ddd;
+        border-radius: 6px;
+    }
+    .list-section h2 { 
+        color: #d32f2f; /* 接頭辞テーマカラー */
+        border-bottom: 2px solid #d32f2f; 
+        padding-bottom: 5px; 
+        font-size: 1.5em;
+    }
+    .list-section.stem h2 {
+        color: #1976d2; /* 基幹テーマカラー */
+        border-bottom: 2px solid #1976d2;
+    }
+    ul { list-style: none; padding: 0; }
+    li { margin-bottom: 8px; font-size: 1.1em; }
+    li a { text-decoration: none; color: #333; }
+    li a:hover { text-decoration: underline; color: #000; }
+</style>
 
-  <div id="prefixes">
-    <h2>接頭辞</h2>
-    <p>読み込み中...</p>
-  </div>
+<h1>🇩🇪 接頭辞付き動詞データベース</h1>
 
-  <div id="roots">
-    <h2>基幹部分</h2>
-    <p>読み込み中...</p>
-  </div>
+<div class="split-layout">
+    <div class="list-section prefix">
+        <h2>接頭辞リスト (Präfix)</h2>
+        <ul>
+        {% assign prefixes = site.data.german_verbs | map: '接頭辞' | uniq | sort %}
+        {% for prefix in prefixes %}
+            <li>
+                <a href="/prefix/{{ prefix | slugify }}/">**{{ prefix }}-**</a> ({{ site.data.german_verbs | where: '接頭辞', prefix | size }} 語)
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+    <div class="list-section stem">
+        <h2>基幹部分リスト (Stamm)</h2>
+        <ul>
+        {% assign stems = site.data.german_verbs | map: '基幹' | uniq | sort %}
+        {% for stem in stems %}
+            <li>
+                <a href="/stem/{{ stem | slugify }}/">**{{ stem }}**</a> ({{ site.data.german_verbs | where: '基幹', stem | size }} 語)
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
