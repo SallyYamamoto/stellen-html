@@ -15,39 +15,20 @@ if (document.getElementById("prefixes")) {
   document.getElementById("roots").innerHTML = "<h2>基幹部分</h2><p>読み込み中...</p>";
 
   fetchData().then(data => {
-    // --- 接頭辞を分離性ごとに分類 ---
-    const groups = { 分離: new Set(), 非分離: new Set(), 両方: new Set() };
+    // --- 接頭辞を抽出して重複排除・ソート ---
+    const prefixes = [...new Set(data.map(d => d["接頭辞"]).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b, 'de'));
 
-    data.forEach(d => {
-      if (d["接頭辞"] && d["分離性"]) {
-        const type = d["分離性"];
-        if (groups[type]) groups[type].add(d["接頭辞"]);
-      }
-    });
+    // --- リストHTML ---
+    const prefixHTML =
+      "<h2>接頭辞</h2><ul>" +
+      prefixes.map(p => `<li><a href="list.html?prefix=${p}">${p}</a></li>`).join("") +
+      "</ul>";
+    document.getElementById("prefixes").innerHTML = prefixHTML;
 
-    // --- ラベルとアイコン設定 ---
-    const labels = {
-      分離: { icon: "🟩", text: "trennbar" },
-      非分離: { icon: "🟥", text: "untrennbar" },
-      両方: { icon: "🟨", text: "teils trennbar" }
-    };
-
-    // --- アルファベット順に並べてHTML生成 ---
-    const sectionHTML = Object.entries(groups).map(([key, set]) => {
-      const sorted = [...set].sort((a, b) => a.localeCompare(b, 'de'));
-      if (sorted.length === 0) return "";
-      return `
-        <h3>${labels[key].icon} ${labels[key].text}</h3>
-        <ul>
-          ${sorted.map(p => `<li><a href="list.html?prefix=${p}">${p}</a></li>`).join("")}
-        </ul>
-      `;
-    }).join("");
-
-    document.getElementById("prefixes").innerHTML = "<h2>接頭辞</h2>" + sectionHTML;
-
-    // --- 基幹部分（アルファベット順） ---
-    const roots = [...new Set(data.map(d => d["基幹"]))].sort((a, b) => a.localeCompare(b, 'de'));
+    // --- 基幹部分（同じくソート） ---
+    const roots = [...new Set(data.map(d => d["基幹"]).filter(Boolean))]
+      .sort((a, b) => a.localeCompare(b, 'de'));
     const rootHTML =
       "<h2>基幹部分</h2><ul>" +
       roots.map(r => `<li><a href="list.html?root=${r}">${r}</a></li>`).join("") +
