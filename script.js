@@ -1,3 +1,6 @@
+console.log("✅ script.js loaded");
+
+
 const JSON_URL = "verbs.json";
 
 // データ読み込み（JSONを取得）
