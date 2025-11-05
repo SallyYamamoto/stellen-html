@@ -1,9 +1,10 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbzdBpkdPeTFcBk1LUmF7f4gVvIOyMejbIP9qa5mx6nJaJrs3ZnwlqHzkXh_4ydpiVIAuA/exec"; // ← 自分のURLに置き換え
+const JSON_URL = "verbs.json";
 
 async function fetchData() {
-  const res = await fetch(API_URL);
+  const res = await fetch(JSON_URL);
   return await res.json();
 }
+
 
 function getQueryParam(name) {
   return new URLSearchParams(window.location.search).get(name);
