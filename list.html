@@ -5,53 +5,111 @@
   <title>ドイツ語接頭辞動詞一覧</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    .table-grid {
+    body {
+      font-family: "Noto Sans JP", sans-serif;
+      color: #222;
+      line-height: 1.6;
+      margin: 2em auto;
+      max-width: 1100px;
+      padding: 0 1em;
+    }
+
+    h1 {
+      color: #004d40;
+      border-bottom: 3px solid #00796b;
+      padding-bottom: 0.3em;
+      margin-bottom: 1em;
+    }
+
+    .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      width: 100%;
+      gap: 1.5rem;
     }
+
     @media (max-width: 700px) {
-      .table-grid { grid-template-columns: 1fr; }
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
 
-    .col {
-      border: 1px solid #ccc;
+    .card {
+      border: 1px solid #ddd;
       border-radius: 10px;
-      padding: 10px 12px;
-      background-color: #fdfdfd;
-      box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+      background: #fafafa;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      overflow: hidden;
     }
 
-    .col h3 {
+    .card-header {
+      background-color: #f0f0f0;
+      padding: 12px;
       text-align: center;
-      margin-top: 0;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 4px;
-      color: white;
-      border-radius: 6px;
-      font-size: 1.1em;
+      border-bottom: 1px solid #ccc;
     }
 
-    .section { margin-bottom: 7px; }
-    .section b span {
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
-      text-underline-offset: 3px;
-      color: #333;
+    .card-header h2 {
+      font-size: 1.8em;
+      margin: 0;
+      font-weight: 600;
     }
 
-    .subnote {
-      margin-top: 5px;
-      font-size: 0.9em;
+    .card-header small {
+      color: #00796b;
+      font-style: italic;
+      font-size: 1em;
+    }
+
+    .card-body {
+      padding: 1em 1.2em;
+    }
+
+    .meaning {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 0.2em;
+    }
+
+    .english {
       color: #555;
       font-style: italic;
+      margin-bottom: 0.8em;
+    }
+
+    .section {
+      margin-bottom: 8px;
+    }
+
+    .label {
+      font-weight: bold;
+      color: #0277bd;
+      display: inline-block;
+      width: 4em;
+    }
+
+    .example {
+      background: #f9f9f9;
+      padding: 6px 10px;
+      border-left: 3px solid #00796b;
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+
+    .derived {
+      border-top: 1px solid #ccc;
+      padding-top: 8px;
+      font-style: italic;
+      color: #555;
+    }
+
+    .derived::before {
+      content: "🅰 ";
     }
   </style>
 </head>
 <body>
   <h1 id="title">接頭辞・基幹別一覧</h1>
-  <div id="verbs" class="table-grid"><p>読み込み中...</p></div>
+  <div id="verbs" class="grid"><p>読み込み中...</p></div>
   <script src="script.js"></script>
 </body>
 </html>
