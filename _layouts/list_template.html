@@ -1,0 +1,24 @@
+---
+layout: default
+---
+<style>
+    .verb-entry { border: 1px solid #eee; padding: 15px; margin-bottom: 10px; border-radius: 4px; }
+    .verb-entry h3 { color: #d32f2f; margin-top: 0; }
+    .verb-entry p { margin: 5px 0; }
+</style>
+
+<h1>{{ page.list_type }} "{{ page.title }}" を持つ動詞一覧</h1>
+<p>{{ page.list_type }}に関する情報: {{ page.list_type | case '接頭辞' | when '接頭辞' | then site.data.german_verbs | where: '接頭辞', page.title | first | map: '接頭辞基本意味' | first | default: site.data.german_verbs | where: '基幹', page.title | first | map: '語感' | first }}</p>
+
+{% assign target_key = page.list_type %}
+
+{% assign filtered_verbs = site.data.german_verbs | where: target_key, page.title %}
+
+{% for verb in filtered_verbs %}
+<div class="verb-entry">
+    <h3><a href="/verb/{{ verb.単語 | slugify }}/">{{ verb.単語 }}</a></h3>
+    <p><strong>意味:</strong> {{ verb.意味 }}</p>
+    <p><strong>英語:</strong> {{ verb.対応英単語 }}</p>
+    <p><strong>構成:</strong> {{ verb.接頭辞 }}-{{ verb.基幹 }}</p>
+</div>
+{% endfor %}
