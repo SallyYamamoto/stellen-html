@@ -2,13 +2,49 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>一覧</title>
+  <title>ドイツ語接頭辞動詞一覧</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .table-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+      width: 100%;
+    }
+    .col {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 10px 12px;
+      background-color: #fdfdfd;
+      box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+    }
+    .col h3 {
+      text-align: center;
+      margin-top: 0;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+      color: white;
+      border-radius: 6px;
+      font-size: 1.1em;
+    }
+    .section { margin-bottom: 7px; }
+    .section b span {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+      color: #333;
+    }
+    .subnote {
+      margin-top: 5px;
+      font-size: 0.9em;
+      color: #555;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
-  <a href="index.html">← ホームに戻る</a>
-  <h1 id="title"></h1>
-  <ul id="verbs"></ul>
+  <h1 id="title">接頭辞・基幹別一覧</h1>
+  <div id="verbs" class="table-grid"><p>読み込み中...</p></div>
   <script src="script.js"></script>
 </body>
 </html>
