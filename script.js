@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbx7F3gz5OCtKkG4tj6fcBdODA9WhHdbkVZHv1CUySNUGvF66_iFjg8QuNNkKnNPUUpzuQ/exec"; // ← 自分のURLに置き換え
+const API_URL = "https://script.google.com/macros/s/AKfycbzdBpkdPeTFcBk1LUmF7f4gVvIOyMejbIP9qa5mx6nJaJrs3ZnwlqHzkXh_4ydpiVIAuA/exec"; // ← 自分のURLに置き換え
 
 async function fetchData() {
   const res = await fetch(API_URL);
